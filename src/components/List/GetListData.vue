@@ -5,18 +5,22 @@ import { PullRefresh } from 'vant'
 import { computed } from 'vue'
 
 const props = defineProps({
+  // 是否禁用下拉刷新
   isDisabledRefresh: {
     type: Boolean,
     default: false,
   },
+  // 是否禁用滚动加载
   disableList: {
     type: Boolean,
     default: false,
   },
+  // 是否需要空数据
   isNeedEmpty: {
     type: Boolean,
     default: true,
   },
+  // 是否需要骨架屏
   isNeedSkeleton: {
     type: Boolean,
     default: true,

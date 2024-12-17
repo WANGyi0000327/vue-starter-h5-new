@@ -1,7 +1,9 @@
 <script setup>
 import { reactive, ref } from 'vue'
 
-const active = ref(0)
+const router = useRouter()
+const route = useRoute()
+const active = ref('Demo')
 const tabbarData = reactive([
   {
     icon: 'wap-home-o',
@@ -36,16 +38,21 @@ const tabbarData = reactive([
     },
   },
 ])
+function onTabChange(name) {
+  const tabNames = ['Demo', 'Tools', 'Playground', 'About']
+  active.value = name
+  const index = tabNames.indexOf(name)
+  const routeName = tabNames[index]
+  router.replace({ name: routeName })
+}
 </script>
 
 <template>
-  <van-tabbar v-model="active" :placeholder="true" :route="true" fixed>
+  <van-tabbar v-model="active" :placeholder="true" fixed @change="onTabChange">
     <van-tabbar-item
-      v-for="(item, index) in tabbarData"
-      :key="index"
-      :icon="item.icon"
-      :to="item.to"
-    >
+v-for="(item) in tabbarData" :key="item.to.name" :icon="item.icon" :title="item.to.name"
+      :name="item.to.name"
+>
       {{ item.title }}
       <template #icon>
         <div :class="item.icon" />
